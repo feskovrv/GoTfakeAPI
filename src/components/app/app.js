@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
@@ -7,16 +7,30 @@ import CharDetails from '../charDetails';
 
 
 const App = () => {
+    const [showRandomChar, toggleRandomChar] = useState(true);
+
+    const toggleRandom = () => {
+        toggleRandomChar(!showRandomChar)
+    }
+    const randomCharRender = () => {
+        return (
+            <Row>
+                <Col lg={{size: 5, offset: 0}}>
+                    <RandomChar/>
+                </Col>
+            </Row>
+        )
+    }
+    const content = showRandomChar ? randomCharRender() : null;
     return (
         <> 
             <Container>
                 <Header />
             </Container>
             <Container>
+                {content}
                 <Row>
-                    <Col lg={{size: 5, offset: 0}}>
-                        <RandomChar/>
-                    </Col>
+                    <button onClick={toggleRandom}>Toggle Random</button>
                 </Row>
                 <Row>
                     <Col md='6'>
